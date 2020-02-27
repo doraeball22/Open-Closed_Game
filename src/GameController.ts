@@ -1,12 +1,12 @@
 import { HandRepresent, PlayerInterface, HandRepresentType } from "./PlayerInterface";
 import { Player } from "./Player";
 import { BotPlayer } from "./BotPlayer";
-import readline from "readline";
+import readlineSync from "readline-sync";
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// const rl = readline.createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
 
 export class GameController {
     private hasWinner: boolean = false;
@@ -16,8 +16,6 @@ export class GameController {
     private players: Player[];
 
     constructor() {
-        // this.players.push(new Player());
-        // this.players.push(new BotPlayer());
         let player = new Player();
         let bot = new BotPlayer();
         this.players = [player, bot];
@@ -49,11 +47,7 @@ export class GameController {
     }
 
     private askWhatIsYourInput(): string {
-        let answer: string;
-        rl.question(`${this.predictor.name} are the predictor, what is your input?`, (input) => {
-            answer = input.toUpperCase();
-            rl.close();
-        });
+        let answer = readlineSync.question(`${this.predictor.name} are the predictor, what is your input?`,);
         return answer;
     }
 
