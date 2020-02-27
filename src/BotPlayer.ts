@@ -7,20 +7,24 @@ export class BotPlayer extends Player {
     }
 
     showHands(): void {
-        this.hands.left = this.randomHand();
-        this.hands.right = this.randomHand();
+        this.hands = {
+            left: this.randomHand(),
+            right: this.randomHand()
+        }
         console.log(`${this.name}: ${this.hands.left}${this.hands.right}`);
     }
 
-    shoutOut(prediction?: number): number {
-        return prediction ?? getRandomInt(4);
+    shoutOut(): number {
+        let prediction =  getRandomInt(5);
+        console.log(prediction);
+        return prediction;
     }
 
     private randomHand(): HandRepresent {
-        return Math.random() === 1 ? HandRepresent.Open : HandRepresent.Closed;
+        return Math.random() < 0.5 ? HandRepresent.Open : HandRepresent.Closed;
     }
 }
 
-function getRandomInt(max: number) {
+function getRandomInt(max: number): number {
     return Math.floor(Math.random() * Math.floor(max));
 }
