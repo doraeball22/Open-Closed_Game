@@ -1,7 +1,8 @@
 import { HandRepresent, PlayerInterface, HandRepresentType } from "./PlayerInterface";
 import { Player } from "./Player";
 import { BotPlayer } from "./BotPlayer";
-import readlineSync from "readline-sync";
+import fs from 'fs';
+import * as readlineSync from "readline-sync";
 
 // const rl = readline.createInterface({
 //     input: process.stdin,
@@ -48,7 +49,7 @@ export class GameController {
 
     private askWhatIsYourInput(): string {
         let answer = readlineSync.question(`${this.predictor.name} are the predictor, what is your input?`,);
-        return answer;
+        return answer.toUpperCase();
     }
 
     public askToPlayAgain(): boolean {

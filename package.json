@@ -2,9 +2,10 @@
   "name": "open-closed_hand_game",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start": "tsc && node dist/index.js",
+    "build": "webpack --mode=development && node dist/bundle.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -12,10 +13,15 @@
   "dependencies": {
     "@types/node": "^12.12.26",
     "readline-sync": "^1.4.10",
-    "tslint": "^6.0.0",
-    "typescript": "^3.7.5"
+    "tslint": "^6.0.0"
   },
   "devDependencies": {
-    "@types/readline-sync": "^1.4.3"
+    "@types/readline-sync": "^1.4.3",
+    "awesome-typescript-loader": "^5.2.1",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.8.2",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
   }
 }

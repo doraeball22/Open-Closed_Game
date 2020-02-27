@@ -2,18 +2,18 @@ import { PlayerInterface, HandRepresent, HandRepresentType } from "./PlayerInter
 
 export class Player implements PlayerInterface {
     name: string;
-    hands: PlayerInterface['hands'];
+    hands: {
+        left: HandRepresent.Open | HandRepresent.Closed,
+        right: HandRepresent.Open | HandRepresent.Closed
+    }
     
     constructor(name?: string) {
         this.name = name ?? 'you';
     }
 
-    showHands(answer?: string): PlayerInterface['hands'] {
-        let left = answer[0] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open;
-        let right = answer[1] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open
-        this.hands.left = left;
-        this.hands.right = right;
-        return this.hands;
+    showHands(answer?: string): void {
+        this.hands.left = answer[0] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open;
+        this.hands.right = answer[1] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open
     }
 
     shoutOut(prediction?: number): number {

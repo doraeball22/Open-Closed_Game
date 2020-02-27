@@ -6,11 +6,10 @@ export class BotPlayer extends Player {
         super('BOT');
     }
 
-    showHands(): PlayerInterface['hands'] {
+    showHands(): void {
         this.hands.left = this.randomHand();
         this.hands.right = this.randomHand();
         console.log(`${this.name}: ${this.hands.left}${this.hands.right}`);
-        return this.hands;
     }
 
     shoutOut(prediction?: number): number {
