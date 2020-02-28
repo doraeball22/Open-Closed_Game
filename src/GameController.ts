@@ -16,10 +16,13 @@ export class GameController {
     }
 
     private countTotalOpenHands(): number {
-        let openHands = this.players.filter((player) => {
-            return player.hands.left === HandRepresent.Open || player.hands.right === HandRepresent.Open
+        let openHands: number = 0;
+        this.players.forEach((player) => {
+            player.hands.left === HandRepresent.Open && ++openHands;
+            player.hands.right === HandRepresent.Open && ++openHands;
         });
-        return openHands.length;
+        console.log('Total open hands', openHands);
+        return openHands;
     }
 
     private isPredictionCorrect(prediction: number): boolean {
