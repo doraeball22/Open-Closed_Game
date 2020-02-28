@@ -3,7 +3,7 @@ import { PlayerInterface, HandRepresent } from "./PlayerInterface";
 
 export class BotPlayer extends Player { 
     constructor() {
-        super('BOT');
+        super('AI');
     }
 
     showHands(): void {

@@ -4,13 +4,15 @@ import { BotPlayer } from "./BotPlayer";
 import * as readlineSync from "readline-sync";
 
 export class GameController {
-    private hasWinner: boolean = false;
+    private hasWinner: boolean;
     private winner: Player;
     private predictor: Player;
     private readonly totalPlayer: number = 2;
     private players: Player[];
 
     constructor() {
+        this.winner = null;
+        this.hasWinner = false;
         this.players = [new Player(), new BotPlayer()];
         this.play();
     }
@@ -40,8 +42,7 @@ export class GameController {
 
             this.hasWinner = this.isPredictionCorrect(prediction);
         }
-        this.winner = this.predictor;
-        // TODO: Play again?
+        this.congratsToWinner();
     }
 
     private askWhatIsYourInput(): string {
@@ -50,7 +51,15 @@ export class GameController {
     }
 
     public askToPlayAgain(): boolean {
-        // TODO: Implement
-        return false;
+        let answer = readlineSync.question('Do you want to play again? (Y/n)\n');
+        if (answer.toUpperCase() === 'N') {
+            console.log('Ok, bye!\n');
+        }
+        return answer.toUpperCase() === 'Y';
+    }
+
+    private congratsToWinner(): void {
+        this.winner = this.predictor;
+        console.log(`${this.winner.name} WIN!!\n`);
     }
 }
