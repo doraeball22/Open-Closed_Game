@@ -5,7 +5,7 @@ export class Player implements PlayerInterface {
     hands: PlayerInterface['hands'];
     
     constructor(name?: string) {
-        this.name = name ?? 'you';
+        this.name = name ?? 'You';
         this.hands = {
             left: HandRepresent.Closed,
             right: HandRepresent.Closed

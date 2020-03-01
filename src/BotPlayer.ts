@@ -2,8 +2,8 @@ import { Player } from "./Player";
 import { PlayerInterface, HandRepresent } from "./PlayerInterface";
 
 export class BotPlayer extends Player { 
-    constructor() {
-        super('AI');
+    constructor(name?: string) {
+        super(name || 'AI');
     }
 
     showHands(): void {

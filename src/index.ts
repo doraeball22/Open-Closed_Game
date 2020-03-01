@@ -1,8 +1,8 @@
 import { GameController } from './GameController';
 
-let areYouPlayAgain = true;
+let doYouPlayAgain = true;
 
 do {
     const gameCtrl = new GameController();
-    areYouPlayAgain = gameCtrl.askToPlayAgain();
-} while (areYouPlayAgain);
+    doYouPlayAgain = gameCtrl.askToPlayAgain();
+} while (doYouPlayAgain);

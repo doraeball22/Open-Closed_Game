@@ -13,7 +13,7 @@ export class GameController {
     constructor() {
         this.winner = null;
         this.hasWinner = false;
-        this.players = [new Player(), new BotPlayer()];
+        this.players = [new Player('You'), new BotPlayer('AI')];
         this.play();
     }
 
@@ -35,8 +35,8 @@ export class GameController {
         console.log('Welcome to the game!');
         for (let i = 0; !this.hasWinner; ++i) {
             this.predictor = this.players[i % this.totalPlayer];
-            let answer = this.askWhatIsYourInput();
-
+            let answer = this.askWhatIsYourInput(this.players[0]);
+            
             let prediction = this.predictor.shoutOut(parseInt(answer[2]));
             this.players.forEach((player) => player.showHands(answer));
 
@@ -45,21 +45,50 @@ export class GameController {
         this.congratsToWinner();
     }
 
-    private askWhatIsYourInput(): string {
-        let answer = readlineSync.question(`${this.predictor.name} are the predictor, what is your input?\n`);
-        return answer.toUpperCase();
+    private askWhatIsYourInput(player: Player): string {
+        let isValidInput: boolean = true;
+        let answer: string = '';
+        do {
+            answer = readlineSync.question(`${this.predictor.name} is/are the predictor, what is your input?\n`);
+            answer = answer.toUpperCase();
+            isValidInput = this.validateInput(answer, player);       
+        } while (!isValidInput);
+        return answer;
     }
 
     public askToPlayAgain(): boolean {
-        let answer = readlineSync.question('Do you want to play again? (Y/n)\n');
-        if (answer.toUpperCase() === 'N') {
-            console.log('Ok, bye!\n');
+        let yes = readlineSync.keyInYN('Do you want to play again?\n');
+        if (yes) {
+            return true;
         }
-        return answer.toUpperCase() === 'Y';
+        console.log('Ok, bye!\n');
+        return false;
     }
 
     private congratsToWinner(): void {
         this.winner = this.predictor;
         console.log(`${this.winner.name} WIN!!\n`);
     }
+
+    private validateInput(answer: string, player: Player): boolean {
+        const isPredictor = this.predictor === player;
+        const openClosedHands = ['OO', 'OC', 'CC', 'CO'];
+        if (!(openClosedHands.includes(answer.substring(0, 2)))) {
+            console.error('Bad input: correct input should be of the form CC3, where the first two letters indicate [O]pen or [C]losed state for each hand, followed by the prediction (0-4).');
+            return false;
+        }
+        if (!isPredictor && (answer.length > 2)) {
+            console.error('Bad input: no prediction expected, you are not the predictor.');
+            return false;   
+        }
+        if (isPredictor && !isValidPredictionInput(answer.substring(2))) {
+            console.error('Bad input: prediction should be in the range of 0-4.');
+            return false;
+        }
+        return true;
+    }
+}
+
+function isValidPredictionInput (value: any): boolean {
+    return (/^(\+)?([0-4])$/.test(value));
 }
