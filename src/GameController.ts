@@ -23,7 +23,6 @@ export class GameController {
             player.hands.left === HandRepresent.Open && ++openHands;
             player.hands.right === HandRepresent.Open && ++openHands;
         });
-        console.log('Total open hands', openHands);
         return openHands;
     }
 
@@ -38,9 +37,13 @@ export class GameController {
             let answer = this.askWhatIsYourInput(this.players[0]);
             
             let prediction = this.predictor.shoutOut(parseInt(answer[2]));
-            this.players.forEach((player) => player.showHands(answer));
+            this.players.forEach((player) => {
+                let showHandsWithPrediction = player === this.predictor ? prediction : undefined;
+                player.showHands(answer, showHandsWithPrediction);
+            });
 
             this.hasWinner = this.isPredictionCorrect(prediction);
+            console.log('\n');
         }
         this.congratsToWinner();
     }

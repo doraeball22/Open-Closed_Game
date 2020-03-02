@@ -6,17 +6,16 @@ export class BotPlayer extends Player {
         super(name || 'AI');
     }
 
-    showHands(): void {
+    showHands(answer?: string, prediction?: number): void {
         this.hands = {
             left: this.randomHand(),
             right: this.randomHand()
         }
-        console.log(`${this.name}: ${this.hands.left}${this.hands.right}`);
+        console.log(`${this.name}: ${this.hands.left}${this.hands.right}${prediction ? prediction : ''}`);
     }
 
     shoutOut(): number {
         let prediction =  getRandomInt(5);
-        console.log(prediction);
         return prediction;
     }
 
