@@ -39,7 +39,7 @@ export class GameController {
             let prediction = this.predictor.shoutOut(parseInt(answer[2]));
             // Each player show our hands
             this.players.forEach((player) => {
-                let showHandsWithPrediction = player === this.predictor ? prediction : undefined;
+                let showHandsWithPrediction = player === this.predictor ? prediction : null;
                 player.showHands(answer, showHandsWithPrediction);
             });
 

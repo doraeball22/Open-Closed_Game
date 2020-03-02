@@ -12,9 +12,10 @@ export class Player implements PlayerInterface {
         }
     }
 
-    showHands(answer?: string, prediction?: number): void {
+    showHands(answer?: string, prediction?: number): PlayerInterface['hands'] {
         this.hands.left = answer[0] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open;
         this.hands.right = answer[1] === HandRepresent.Closed ? HandRepresent.Closed : HandRepresent.Open;
+        return this.hands;
     }
 
     shoutOut(prediction?: number): number {
