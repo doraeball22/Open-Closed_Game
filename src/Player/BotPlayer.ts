@@ -1,5 +1,5 @@
 import { Player } from "./Player";
-import { PlayerInterface, HandRepresent } from "./PlayerInterface";
+import { HandRepresent } from "./PlayerInterface";
 
 export class BotPlayer extends Player { 
     constructor(name?: string) {

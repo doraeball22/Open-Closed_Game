@@ -1,11 +1,11 @@
-import { PlayerInterface, HandRepresent, HandRepresentType } from "./PlayerInterface";
+import { PlayerInterface, HandRepresent } from "./PlayerInterface";
 
 export class Player implements PlayerInterface {
     name: string;
     hands: PlayerInterface['hands'];
     
     constructor(name?: string) {
-        this.name = name ?? 'You';
+        this.name = name || 'You';
         this.hands = {
             left: HandRepresent.Closed,
             right: HandRepresent.Closed

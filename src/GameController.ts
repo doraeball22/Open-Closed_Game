@@ -1,6 +1,5 @@
-import { HandRepresent, PlayerInterface, HandRepresentType } from "./PlayerInterface";
-import { Player } from "./Player";
-import { BotPlayer } from "./BotPlayer";
+
+import { Player, BotPlayer, HandRepresent } from "./Player";
 import * as readlineSync from "readline-sync";
 
 export class GameController {
@@ -36,7 +35,9 @@ export class GameController {
             this.predictor = this.players[i % this.totalPlayer];
             let answer = this.askWhatIsYourInput(this.players[0]);
             
+            // Who is predictor will predict
             let prediction = this.predictor.shoutOut(parseInt(answer[2]));
+            // Each player show our hands
             this.players.forEach((player) => {
                 let showHandsWithPrediction = player === this.predictor ? prediction : undefined;
                 player.showHands(answer, showHandsWithPrediction);
