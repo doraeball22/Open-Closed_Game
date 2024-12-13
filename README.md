@@ -140,6 +140,7 @@ Bad input: prediction should be in the range of 0-4.
 Or, if they are not the predictor:
 
 Bad input: no prediction expected, you are not the predictor.
+```
 
 
 ---
